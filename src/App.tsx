@@ -7,6 +7,7 @@ function App() {
   return (
     <div className={styles.container}>
       <h1>Hello</h1>
+      <button>Teste</button>
     </div>
   )
 }
