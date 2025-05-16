@@ -1,0 +1,37 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & > img {
+    height: 3.75rem;
+  }
+}
+.container div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-block: 3.25rem;
+
+  & span {
+    font-size: 1.2rem;
+    color: #9b9b9b;
+  }
+  & strong {
+    font-size: 1.4rem;
+    color: #e8891c;
+  }
+}
+
+.container div button {
+  background-color: transparent;
+  border: none;
+  & img {
+    height: 2rem;
+    transition: scale 0.5s;
+  }
+  & img:hover {
+    scale: 1.2;
+  }
+}
