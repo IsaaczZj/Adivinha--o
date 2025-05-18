@@ -1,4 +1,5 @@
 import styles from "./App.module.css";
+import Guess from "./components/Guess";
 import Header from "./components/Header";
 import Letter from "./components/Letter";
 import Tip from "./components/Tip";
@@ -19,6 +20,10 @@ function App() {
           <Letter value="" />
           <Letter value="C" />
           <Letter value="T" />
+        </div>
+        <h4>Palpite</h4>
+        <div>
+          <Guess autoFocus maxLength={1} placeholder="?"/>
         </div>
       </main>
     </div>
