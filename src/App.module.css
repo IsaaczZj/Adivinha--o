@@ -1,7 +1,25 @@
 .container{
   width: 100%;
   height: 100vh;
+  padding-inline: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #4f4fb9;
+
+  & main{
+    width: 556px;
+    background-color: #fff;
+    padding: 2rem;
+    padding-bottom: 4.5rem;
+    border-radius: 0.75rem;
+  }
+}
+.container .word{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
 }
