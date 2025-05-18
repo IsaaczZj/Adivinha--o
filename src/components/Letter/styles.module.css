@@ -1,4 +1,4 @@
-.letter{
+.letter {
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 0.75rem;
@@ -10,5 +10,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  
+}
+.small {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+  border: 1px solid #6363db;
 }
