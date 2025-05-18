@@ -1,22 +1,19 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-body{
+body {
   font-family: "Noto Sans", sans-serif;
-  font-optical-sizing: auto;
 }
-input{
+input,button {
   font-family: "Noto Sans", sans-serif;
-  font-optical-sizing: auto;
-
 }
 
-button{
+button {
   cursor: pointer;
   transition: filter 0.2s;
 }
-button:hover{
+button:hover {
   filter: brightness(0.9);
 }

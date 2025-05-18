@@ -1,4 +1,5 @@
 import styles from "./App.module.css";
+import Button from "./components/Button";
 import Guess from "./components/Guess";
 import Header from "./components/Header";
 import Letter from "./components/Letter";
@@ -24,6 +25,7 @@ function App() {
         <h4>Palpite</h4>
         <div>
           <Guess autoFocus maxLength={1} placeholder="?"/>
+          <Button title="Confirmar"/>
         </div>
       </main>
     </div>
