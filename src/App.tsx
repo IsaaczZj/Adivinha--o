@@ -10,13 +10,10 @@ import { WORDS, type Challenge } from "./utils/words";
 import { ToastContainer, toast } from "react-toastify";
 
 function App() {
-  const[score,setScore]= useState(0)
+  const [score, setScore] = useState(0);
   const [challange, setChallenge] = useState<Challenge | null>(null);
-  const [attempts, setAttempts] = useState(0);
   const [letter, setLetter] = useState("");
-  const [usedLetter, setUsedLetter] = useState<UsedLetter[]>([
-    { value: "R", isCorrect: false },
-  ]);
+  const [usedLetter, setUsedLetter] = useState<UsedLetter[]>([]);
 
   function handleRestartGame() {
     alert("Jogo reiniciado");
@@ -26,8 +23,9 @@ function App() {
     const index = Math.floor(Math.random() * WORDS.length);
     const randonWord = WORDS[index];
     setChallenge(randonWord);
-    setAttempts(0);
+    setScore(0);
     setLetter("");
+    setUsedLetter([]);
   }
 
   function handleConfirm() {
@@ -42,15 +40,17 @@ function App() {
     if (exists) {
       return toast.info("Você já utilizou a letra " + value);
     }
-    const hits = challange.word.toUpperCase().split('').filter(char => char === value).length
-    
-    const correct = hits > 0
-    const currentScore = score + hits
-    
+    const hits = challange.word
+      .toUpperCase()
+      .split("")
+      .filter((char) => char === value).length;
 
-    setUsedLetter([...usedLetter, {value, isCorrect:correct}])
-    setScore(currentScore)
-    setLetter('')
+    const correct = hits > 0;
+    const currentScore = score + hits;
+
+    setUsedLetter([...usedLetter, { value, isCorrect: correct }]);
+    setScore(currentScore);
+    setLetter("");
   }
 
   useEffect(() => {
@@ -61,12 +61,16 @@ function App() {
   return (
     <div className={styles.container}>
       <main>
-        <Header current={attempts} max={10} onRestart={handleRestartGame} />
+        <Header current={score} max={10} onRestart={handleRestartGame} />
         <Tip tip={challange?.tip} />
         <div className={styles.word}>
-          {challange.word.split("").map((letter) => (
-            <Letter/>
-          ))}
+          {challange.word.split("").map((letter, index) => {
+            const correctLetter = usedLetter.find(
+              (currentLetter) => currentLetter.value.toUpperCase() === letter.toUpperCase()
+            );
+
+            return <Letter key={index} value={correctLetter?.value} color={correctLetter?.isCorrect ? 'correct' : 'default'}/>;
+          })}
         </div>
         <h4>Palpite</h4>
 

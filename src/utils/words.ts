@@ -18,5 +18,5 @@ export const WORDS: Challenge[] = [
     word: "TYPESCRIPT",
     tip: "Superset JavaScript que adiciona tipagem",
   },
-  { id: 6, word: "TAILWIND CSS", tip: "Framework mais popular de CSS" },
+  { id: 6, word: "TAILWINDCSS", tip: "Framework mais popular de CSS" },
 ];
