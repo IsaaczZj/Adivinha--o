@@ -10,6 +10,7 @@ import { WORDS, type Challenge } from "./utils/words";
 import { ToastContainer, toast } from "react-toastify";
 
 function App() {
+  const[score,setScore]= useState(0)
   const [challange, setChallenge] = useState<Challenge | null>(null);
   const [attempts, setAttempts] = useState(0);
   const [letter, setLetter] = useState("");
@@ -20,6 +21,7 @@ function App() {
   function handleRestartGame() {
     alert("Jogo reiniciado");
   }
+  //Escolhe a challange(PALAVRA A SER DESCOBERTA) aleatoriamente
   function startGame() {
     const index = Math.floor(Math.random() * WORDS.length);
     const randonWord = WORDS[index];
@@ -40,7 +42,14 @@ function App() {
     if (exists) {
       return toast.info("Você já utilizou a letra " + value);
     }
-    setUsedLetter([...usedLetter, {value, isCorrect:true}])
+    const hits = challange.word.toUpperCase().split('').filter(char => char === value).length
+    
+    const correct = hits > 0
+    const currentScore = score + hits
+    
+
+    setUsedLetter([...usedLetter, {value, isCorrect:correct}])
+    setScore(currentScore)
     setLetter('')
   }
 
@@ -56,7 +65,7 @@ function App() {
         <Tip tip={challange?.tip} />
         <div className={styles.word}>
           {challange.word.split("").map((letter) => (
-            <Letter />
+            <Letter/>
           ))}
         </div>
         <h4>Palpite</h4>
