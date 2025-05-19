@@ -7,6 +7,7 @@ import Letter from "./components/Letter";
 import LettersUsed, { type UsedLetter } from "./components/LettersUsed";
 import Tip from "./components/Tip";
 import { WORDS, type Challenge } from "./utils/words";
+import { ToastContainer, toast } from "react-toastify";
 
 function App() {
   const [challange, setChallenge] = useState<Challenge | null>(null);
@@ -27,6 +28,22 @@ function App() {
     setLetter("");
   }
 
+  function handleConfirm() {
+    if (!challange) return;
+    if ((!letter.trim() && letter.length === 0) || letter === " ") {
+      return toast.error("Digite uma letra!");
+    }
+    const value = letter.toUpperCase();
+    const exists = usedLetter.find(
+      (letter) => letter.value.toUpperCase() === value
+    );
+    if (exists) {
+      return toast.info("Você já utilizou a letra " + value);
+    }
+    setUsedLetter([...usedLetter, {value, isCorrect:true}])
+    setLetter('')
+  }
+
   useEffect(() => {
     startGame();
   }, []);
@@ -43,11 +60,23 @@ function App() {
           ))}
         </div>
         <h4>Palpite</h4>
+
         <div>
-          <Guess autoFocus maxLength={1} placeholder="?" />
-          <Button title="Confirmar" />
+          <Guess
+            autoFocus
+            maxLength={1}
+            placeholder="?"
+            onChange={({ target }) => setLetter(target.value)}
+            value={letter}
+          />
+          <Button title="Confirmar" onClick={handleConfirm} />
         </div>
         <LettersUsed data={usedLetter} />
+        <ToastContainer
+          position="top-center"
+          theme="colored"
+          className={styles.toast}
+        />
       </main>
     </div>
   );
