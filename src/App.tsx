@@ -15,6 +15,7 @@ function App() {
   const [letter, setLetter] = useState("");
   const [usedLetter, setUsedLetter] = useState<UsedLetter[]>([]);
 
+
   function handleRestartGame() {
     alert("Jogo reiniciado");
   }
@@ -53,15 +54,31 @@ function App() {
     setLetter("");
   }
 
+  function endGame(msg:string){
+    return toast.info(msg)
+    startGame()
+  }
+
   useEffect(() => {
     startGame();
   }, []);
+
+  useEffect(() => {
+    if(!challange) return
+
+    setTimeout(() => {
+      if(score === challange.word.length){
+        return endGame("Parabens, voce descobriu a palavra")
+      }
+    },500)
+
+  },[score, usedLetter.length])
 
   if (!challange) return;
   return (
     <div className={styles.container}>
       <main>
-        <Header current={score} max={10} onRestart={handleRestartGame} />
+        <Header current={usedLetter.length} max={challange.word.length + 5} onRestart={handleRestartGame} />
         <Tip tip={challange?.tip} />
         <div className={styles.word}>
           {challange.word.split("").map((letter, index) => {
