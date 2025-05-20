@@ -87,7 +87,7 @@ function App() {
     }
     setTimeout(() => {
       return startGame();
-    }, 2000);
+    }, 3000);
   }
 
   useEffect(() => {

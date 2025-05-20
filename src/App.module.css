@@ -60,6 +60,7 @@
   color: #03ab4f;
   text-transform: uppercase;
   position: relative;
+  text-decoration: underline;
   &::before {
     content: "↓";
     font-size: 1.5rem;
