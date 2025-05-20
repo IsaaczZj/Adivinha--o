@@ -30,3 +30,8 @@
   border-color: #691b0a;
   color: #691b0a;
 }
+.showWord{
+  background-color: rgb(236, 64, 64);
+  border-color: rgb(243, 6, 6);
+  color: white;
+}

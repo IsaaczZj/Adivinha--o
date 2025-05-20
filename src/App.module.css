@@ -47,9 +47,25 @@
     border: none;
     color: white;
     font-size: 1rem;
-
   }
-  & .decline{
+  & .decline {
     background-color: red;
+  }
+}
+.correctWord {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-block: 0.75rem;
+  font-weight: 600;
+  color: #03ab4f;
+  text-transform: uppercase;
+  position: relative;
+  &::before {
+    content: "↓";
+    font-size: 1.5rem;
+    position: absolute;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }

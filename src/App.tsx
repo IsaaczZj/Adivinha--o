@@ -14,6 +14,7 @@ function App() {
   const [challange, setChallenge] = useState<Challenge | null>(null);
   const [letter, setLetter] = useState("");
   const [usedLetter, setUsedLetter] = useState<UsedLetter[]>([]);
+  const [limitAttempts, setLimitAttempts] = useState(false);
 
   function handleRestartGame() {
     toast(({ closeToast }) => (
@@ -49,6 +50,7 @@ function App() {
     setScore(0);
     setLetter("");
     setUsedLetter([]);
+    setLimitAttempts(false);
   }
 
   function handleConfirm() {
@@ -101,9 +103,10 @@ function App() {
         return;
       }
       if (usedLetter.length === challange.word.length + 5) {
-        return endGame("Que pena, voce usou todas as tentativas", true);
+        setLimitAttempts(true);
+        endGame("Que pena, voce usou todas as tentativas", true);
       }
-    }, 500);
+    }, 1000);
   }, [score, usedLetter.length]);
 
   if (!challange) return;
@@ -116,6 +119,9 @@ function App() {
           onRestart={handleRestartGame}
         />
         <Tip tip={challange?.tip} />
+        {limitAttempts && (
+          <div className={styles.correctWord}> Palavra correta </div>
+        )}
         <div className={styles.word}>
           {challange.word.split("").map((letter, index) => {
             const correctLetter = usedLetter.find(
@@ -124,11 +130,17 @@ function App() {
             );
 
             return (
-              <Letter
-                key={index}
-                value={correctLetter?.value}
-                color={correctLetter?.isCorrect ? "correct" : "default"}
-              />
+              <>
+                {limitAttempts ? (
+                  <Letter key={index} value={letter} color="showWord" />
+                ) : (
+                  <Letter
+                    key={index}
+                    value={correctLetter?.value}
+                    color={correctLetter?.isCorrect ? "correct" : "default"}
+                  />
+                )}
+              </>
             );
           })}
         </div>
