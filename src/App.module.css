@@ -29,7 +29,7 @@
 .containerButton {
   display: flex;
   flex-direction: column;
-
+  text-align: center;
   & > div {
     width: 100%;
     display: flex;

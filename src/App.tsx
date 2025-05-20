@@ -70,7 +70,7 @@ function App() {
       .toUpperCase()
       .split("")
       .filter((char) => char === value).length;
-
+      
     const correct = hits > 0;
     const currentScore = score + hits;
 
