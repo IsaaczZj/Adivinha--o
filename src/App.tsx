@@ -15,9 +15,31 @@ function App() {
   const [letter, setLetter] = useState("");
   const [usedLetter, setUsedLetter] = useState<UsedLetter[]>([]);
 
-
   function handleRestartGame() {
-    alert("Jogo reiniciado");
+    toast(({ closeToast }) => (
+      <span className={styles.containerButton}>
+        Tem certeza que deseja reiniciar o jogo?
+        <div>
+          <button
+            className={styles.toastButton}
+            onClick={() => {
+              startGame();
+              if (closeToast) closeToast();
+            }}
+          >
+            Sim
+          </button>
+          <button
+            className={`${styles.toastButton} ${styles.decline}`}
+            onClick={() => {
+              if (closeToast) closeToast();
+            }}
+          >
+            Não
+          </button>
+        </div>
+      </span>
+    ));
   }
   //Escolhe a challange(PALAVRA A SER DESCOBERTA) aleatoriamente
   function startGame() {
@@ -39,6 +61,7 @@ function App() {
       (letter) => letter.value.toUpperCase() === value
     );
     if (exists) {
+      setLetter("");
       return toast.info("Você já utilizou a letra " + value);
     }
     const hits = challange.word
@@ -54,9 +77,15 @@ function App() {
     setLetter("");
   }
 
-  function endGame(msg:string){
-    return toast.info(msg)
-    startGame()
+  function endGame(msg: string, lost?: boolean) {
+    if (lost) {
+      toast.warn(msg);
+    } else {
+      toast.info(msg);
+    }
+    setTimeout(() => {
+      return startGame();
+    }, 2000);
   }
 
   useEffect(() => {
@@ -64,29 +93,43 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if(!challange) return
+    if (!challange) return;
 
     setTimeout(() => {
-      if(score === challange.word.length){
-        return endGame("Parabens, voce descobriu a palavra")
+      if (score === challange.word.length) {
+        endGame("Parabens, voce descobriu a palavra");
+        return;
       }
-    },500)
-
-  },[score, usedLetter.length])
+      if (usedLetter.length === challange.word.length + 5) {
+        return endGame("Que pena, voce usou todas as tentativas", true);
+      }
+    }, 500);
+  }, [score, usedLetter.length]);
 
   if (!challange) return;
   return (
     <div className={styles.container}>
       <main>
-        <Header current={usedLetter.length} max={challange.word.length + 5} onRestart={handleRestartGame} />
+        <Header
+          current={usedLetter.length}
+          max={challange.word.length + 5}
+          onRestart={handleRestartGame}
+        />
         <Tip tip={challange?.tip} />
         <div className={styles.word}>
           {challange.word.split("").map((letter, index) => {
             const correctLetter = usedLetter.find(
-              (currentLetter) => currentLetter.value.toUpperCase() === letter.toUpperCase()
+              (currentLetter) =>
+                currentLetter.value.toUpperCase() === letter.toUpperCase()
             );
 
-            return <Letter key={index} value={correctLetter?.value} color={correctLetter?.isCorrect ? 'correct' : 'default'}/>;
+            return (
+              <Letter
+                key={index}
+                value={correctLetter?.value}
+                color={correctLetter?.isCorrect ? "correct" : "default"}
+              />
+            );
           })}
         </div>
         <h4>Palpite</h4>
