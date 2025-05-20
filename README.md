@@ -19,7 +19,6 @@ Este é um projeto de um jogo de adivinhação de palavras, onde o jogador tenta
     *   Informar sobre a necessidade de digitar uma letra.
     *   Notificar vitória ou derrota.
 *   Revelação da palavra correta caso o jogador esgote as tentativas.
-*   Design responsivo (assumindo que o CSS visa isso).
 
 ## Tecnologias Utilizadas
 
