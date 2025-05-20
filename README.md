@@ -1,54 +1,77 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![image](https://github.com/user-attachments/assets/b25d3c7d-dce6-40eb-a783-cc03f24fd70c)
 
-Currently, two official plugins are available:
+# Jogo da Adivinhação de Palavras
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Este é um projeto de um jogo de adivinhação de palavras, onde o jogador tenta descobrir uma palavra secreta com base em dicas e letras fornecidas.
 
-## Expanding the ESLint configuration
+## Funcionalidades
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+*   Seleção aleatória de uma palavra e sua respectiva dica a cada novo jogo.
+*   Interface para o usuário inserir letras como palpite.
+*   Exibição das letras corretas na posição correspondente da palavra.
+*   Lista de letras já utilizadas, indicando se foram corretas ou incorretas.
+*   Contagem de acertos (letras corretas descobertas).
+*   Limite de tentativas para adivinhar a palavra.
+*   Opção para reiniciar o jogo a qualquer momento.
+*   Feedback visual utilizando toasts para:
+    *   Alertar sobre letras já utilizadas.
+    *   Informar sobre a necessidade de digitar uma letra.
+    *   Notificar vitória ou derrota.
+*   Revelação da palavra correta caso o jogador esgote as tentativas.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Tecnologias Utilizadas
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+*   **React**: Biblioteca principal para construção da interface.
+*   **TypeScript**: Superset do JavaScript para tipagem estática.
+*   **Vite**: Ferramenta de build rápida para desenvolvimento.
+*   **CSS Modules**: Para estilização escopada dos componentes.
+*   **React Toastify**: Para exibir notificações (toasts) ao usuário.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Como Executar o Projeto
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+1.  **Clone o repositório:**
+    ```bash
+    git clone
+    cd nome da pasta
+    ```
+
+2.  **Instale as dependências:**
+    ```bash
+    npm install
+    ```
+    ou se você utiliza Yarn:
+    ```bash
+    yarn install
+    ```
+
+3.  **Execute o servidor de desenvolvimento:**
+    ```bash
+    npm run dev
+    ```
+    ou se você utiliza Yarn:
+    ```bash
+    yarn dev
+    ```
+
+4.  Abra o navegador no endereço fornecido (geralmente `http://localhost:5173`).
+
+## Estrutura do Projeto
+
+*   `src/`: Contém todo o código fonte da aplicação.
+    *   `App.tsx`: Componente principal que contém a lógica central do jogo e a estrutura da interface.
+    *   `App.module.css`: Arquivo de estilos CSS Modules para o componente `App`.
+    *   `components/`: Diretório para componentes reutilizáveis da interface.
+        *   `Button/`: Componente de botão.
+        *   `Guess/`: Componente de input para o palpite da letra.
+        *   `Header/`: Componente de cabeçalho, exibindo tentativas e botão de reiniciar.
+        *   `Letter/`: Componente para exibir uma letra individual (da palavra secreta ou das letras usadas).
+        *   `LettersUsed/`: Componente para listar as letras já utilizadas pelo jogador.
+        *   `Tip/`: Componente para exibir a dica da palavra secreta.
+    *   `utils/`: Contém arquivos utilitários.
+        *   `words.ts`: Define a estrutura `Challenge` e a lista de palavras e dicas (`WORDS`) para o jogo.
+*   `public/`: Arquivos estáticos que são servidos diretamente.
+*   `index.html`: Arquivo HTML principal da aplicação.
+*   `vite.config.ts`: Arquivo de configuração para o Vite.
+*   `tsconfig.json` / `tsconfig.app.json` / `tsconfig.node.json`: Arquivos de configuração do TypeScript.
+*   `package.json`: Define as informações do projeto, scripts e dependências.
